@@ -108,11 +108,6 @@ const MultipleSelectList: React.FC<MultipleSelectListProps> = ({
         
     },[dropdownShown])
 
-    React.useEffect(() => {
-        setSelected(defaultSelected);
-    }, []);
-         
-
     return(
         <View>
             {
