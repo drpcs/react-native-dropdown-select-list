@@ -108,6 +108,10 @@ const MultipleSelectList: React.FC<MultipleSelectListProps> = ({
         
     },[dropdownShown])
 
+    React.useEffect(() => {
+        setSelected(defaultSelected || []);  
+    }, []);
+
     return(
         <View>
             {
@@ -240,9 +244,9 @@ const MultipleSelectList: React.FC<MultipleSelectListProps> = ({
                                         }else{
                                             return(
                                                 <TouchableOpacity style={[styles.option,dropdownItemStyles]} key={index} onPress={ () => {
-                                                      if (disabled || (index === 0 && selectedval.includes(value))) {
-                                                        return;
-                                                    }
+                                                       if (disabled || (index === 0 && selectedval.includes(value))) {
+                                                            return; 
+                                                        }
                                                     
                                                     let existing = selectedval?.indexOf(value)
 
@@ -250,6 +254,12 @@ const MultipleSelectList: React.FC<MultipleSelectListProps> = ({
                                                     // console.log(existing);
 
                                                     if(existing != -1  && existing != undefined){
+
+                                                        const firstDefaultValue = defaultSelected[0];
+
+                                                        if (selectedval.length === 1 && selectedval[0] === firstDefaultValue) {
+                                                            return;
+                                                        }
 
                                                         let sv = [...selectedval];
                                                         sv.splice(existing,1) 
