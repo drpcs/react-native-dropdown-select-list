@@ -244,9 +244,6 @@ const MultipleSelectList: React.FC<MultipleSelectListProps> = ({
                                         }else{
                                             return(
                                                 <TouchableOpacity style={[styles.option,dropdownItemStyles]} key={index} onPress={ () => {
-                                                       if (disabled || (index === 0 && selectedval.includes(value))) {
-                                                            return; 
-                                                        }
                                                     
                                                     let existing = selectedval?.indexOf(value)
 
