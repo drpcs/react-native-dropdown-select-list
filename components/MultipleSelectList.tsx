@@ -250,27 +250,29 @@ const MultipleSelectList: React.FC<MultipleSelectListProps> = ({
                                                     
                                                     let existing = selectedval?.indexOf(value)
 
-
+                                                    const firstDefaultValue = defaultSelected[0];
                                                     // console.log(existing);
 
                                                     if(existing != -1  && existing != undefined){
 
-                                                        const firstDefaultValue = defaultSelected[0];
+                                                        
 
-                                                        if (selectedval.length === 1 && selectedval[0] === firstDefaultValue) {
-                                                            return;
+                                                      const isDefaultOption = value === firstDefaultValue;
+                                                        if (isDefaultOption) {
+                                                            setSelectedVal((val: any) => {
+                                                                return [firstDefaultValue, ...val.filter((item: any) => item !== firstDefaultValue)];
+                                                            });
+                                                        } else {
+                                                            let sv = [...selectedval];
+                                                            sv.splice(existing, 1);
+                                                            setSelectedVal(sv);
+                                                
+                                                            setSelected((val: any) => {
+                                                                let temp = [...val];
+                                                                temp.splice(existing, 1);
+                                                                return temp;
+                                                            });
                                                         }
-
-                                                        let sv = [...selectedval];
-                                                        sv.splice(existing,1) 
-                                                        setSelectedVal(sv);
-
-
-                                                        setSelected((val: any) => {
-                                                            let temp = [...val];
-                                                            temp.splice(existing,1) 
-                                                            return temp;
-                                                        });
                                                         
                                                         // onSelect()
                                                     }else{
